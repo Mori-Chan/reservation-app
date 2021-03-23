@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path:'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     FormsModule
   ],
   providers: [
+    AuthGuard,
     AuthService
   ],
   bootstrap: []
