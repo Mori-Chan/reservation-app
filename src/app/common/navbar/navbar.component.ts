@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AuthService } from '../../auth/shared/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,11 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(
+      public location: Location,
+      private element : ElementRef,
+      public auth: AuthService
+    ) {
         this.sidebarVisible = false;
     }
 
@@ -31,14 +36,14 @@ export class NavbarComponent implements OnInit {
         html.classList.add('nav-open');
 
         this.sidebarVisible = true;
-    };
+    }
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
         // console.log(html);
         this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
-    };
+    }
     sidebarToggle() {
         // const toggleButton = this.toggleButton;
         // const body = document.getElementsByTagName('body')[0];
@@ -47,7 +52,7 @@ export class NavbarComponent implements OnInit {
         } else {
             this.sidebarClose();
         }
-    };
+    }
     isHome() {
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
@@ -59,6 +64,9 @@ export class NavbarComponent implements OnInit {
         else {
             return false;
         }
+    }
+    logout() {
+      this.auth.logout();
     }
 
 }
