@@ -3,9 +3,10 @@ const router = express.Router();
 const Product = require("../model/product");
 const UserCtrl = require("../controllers/user");
 
-router.get('/secret', UserCtrl.authMiddleware, function(req, res) {
-  return res.json({"secret": true});
-});
+// Postmanでのテスト時に使用
+// router.get('/secret', UserCtrl.authMiddleware, function(req, res) {
+//   return res.json({"secret": true});
+// });
 
 router.get('', function(req, res) {
   Product.find({}, function(err, foundProducts) {
